@@ -8,7 +8,7 @@ build:
 	docker build -t profile:1.0 .
 
 push:
-	docker login --username joaosoft --password JoAo1081321
+	docker login --username joaosoft
 	docker tag profile:1.0 joaosoft/profile
 	docker push joaosoft/profile
 
