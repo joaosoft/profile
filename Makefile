@@ -5,7 +5,7 @@ run:
 	go run ./bin/launcher/main.go
 
 build:
-	go build .
+	docker build -t profile:1.0 .
 
 fmt:
 	go fmt ./...

@@ -10,16 +10,19 @@ import (
 func New(level Level, code int, err interface{}, params ...interface{}) *Err {
 
 	var message string
-
 	switch v := err.(type) {
 	case error:
-		message = fmt.Sprintf(v.Error(), params...)
+		message = v.Error()
 
 	case string:
-		message = fmt.Sprintf(v, params...)
+		message = v
 
 	default:
-		message = fmt.Sprintf(fmt.Sprint(v), params...)
+		message = fmt.Sprint(v)
+	}
+
+	if len(params) > 0 {
+		message = fmt.Sprintf(fmt.Sprint(message), params...)
 	}
 
 	var stack string
