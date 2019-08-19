@@ -7,6 +7,7 @@ LABEL maintainer="João Ribeiro <joaosoft@gmail.com>"
 
 RUN apk update && apk add --no-cache \
 	curl \
+	mercurial \
 	bash \
 	dep \
 	git
@@ -16,7 +17,8 @@ COPY . .
 
 RUN dep ensure
 
-RUN GOOS=linux GOARCH=arm GOARM=5 CGO_ENABLED=0 go build -a -installsuffix cgo -o profile .
+# build for raspberry pi 3
+RUN GOOS=linux GOARCH=arm GOARM=7 CGO_ENABLED=0 go build -o profile ./main
 
 RUN chmod +x profile
 
@@ -25,8 +27,8 @@ RUN chmod +x profile
 # STEP 2 run binary
 ############################
 FROM scratch
-
 COPY --from=builder /go/src/profile/profile .
+COPY config config
 
-EXPOSE 8002
+EXPOSE 800
 ENTRYPOINT ["./profile"]
