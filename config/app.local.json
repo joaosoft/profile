@@ -4,7 +4,7 @@
     "dbr": {
       "db": {
         "driver": "postgres",
-        "datasource": "postgres://user:password@localhost:7000/postgres?sslmode=disable&search_path=profile"
+        "datasource": "postgres://user:password@postgres:5432/postgres?sslmode=disable&search_path=profile"
       }
     },
     "log": {
@@ -17,7 +17,7 @@
       "db": {
         "schema": "profile",
         "driver": "postgres",
-        "datasource": "postgres://user:password@localhost:7000/postgres?sslmode=disable&search_path=profile"
+        "datasource": "postgres://user:password@postgres:5432/postgres?sslmode=disable&search_path=profile"
       },
       "log": {
         "level": "info"
