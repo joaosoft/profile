@@ -29,6 +29,7 @@ RUN chmod +x profile
 FROM scratch
 COPY --from=builder /go/src/profile/profile .
 COPY config config
+COPY ./schema schema
 
 EXPOSE 800
 ENTRYPOINT ["./profile"]
