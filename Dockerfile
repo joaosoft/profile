@@ -26,7 +26,16 @@ RUN chmod +x profile
 ############################
 # STEP 2 run binary
 ############################
-FROM scratch
+
+#FROM scratch
+FROM alpine:latest
+
+RUN apk update && apk --no-cache add \
+	ca-certificates \
+	curl \
+	curl \
+	bash
+
 COPY --from=builder /go/src/profile/profile .
 COPY config config
 COPY ./schema schema
