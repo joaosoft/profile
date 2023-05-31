@@ -7,14 +7,14 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"github.com/joaosoft/auth-types/basic"
-	"github.com/joaosoft/auth-types/jwt"
 	"io"
 	"path/filepath"
 	"strconv"
 	"time"
-)
 
+	"github.com/joaosoft/auth-types/basic"
+	"github.com/joaosoft/auth-types/jwt"
+)
 
 func (r *Request) Set(contentType ContentType, b []byte) error {
 	r.ContentType = contentType
@@ -176,9 +176,8 @@ func (r *Request) GetFormDataString(name string) string {
 	return ""
 }
 
-func (r *Request) WithBody(body []byte, contentType ContentType) *Request {
+func (r *Request) WithBody(body []byte) *Request {
 	r.Body = body
-	r.ContentType = contentType
 
 	return r
 }
@@ -319,7 +318,9 @@ func (r *Request) buildHeaders() ([]byte, error) {
 			}
 		}
 	} else {
-		r.Headers[HeaderContentType] = []string{string(r.ContentType)}
+		if r.ContentType != ContentTypeEmpty {
+			r.Headers[HeaderContentType] = []string{string(r.ContentType)}
+		}
 		lenBody := len(r.Body)
 		if lenBody > 0 {
 			r.Headers[HeaderContentLength] = []string{strconv.Itoa(lenBody)}
