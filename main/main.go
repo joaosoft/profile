@@ -1,6 +1,6 @@
 package main
 
-import "profile"
+import "github.com/joaosoft/profile"
 
 func main() {
 	p, err := profile.NewProfile()
